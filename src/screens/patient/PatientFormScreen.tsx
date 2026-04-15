@@ -13,7 +13,7 @@ import { Select, SelectItem } from "@heroui/react";
 
 import { BloodType } from '@/enums/patient/BloodType'
 import { TitlePage } from '@/components/page/TitlePage'
-import { Patient } from '@/models/patient/Patient';
+import { Patient } from '@/models/patient/patients/Patient';
 
 const bloodTypes = [
     { key: BloodType.A_POSITIVE.toString() , label: 'A +' },

@@ -1,5 +1,5 @@
 import { BloodTypeChip } from './BloodTypeChip';
-import { Patient } from '@/models/patient/Patient';
+import { Patient } from '@/models/patient/patients/Patient';
 
 interface PatientInfoProps {
     patient: Patient
@@ -8,41 +8,42 @@ interface PatientInfoProps {
 export function PatientInfo({ patient }: PatientInfoProps) {
 
     return (
-        <div className="min-h-screen container mx-auto">    
-            <h1 className="text-2xl font-bold mb-4">Información del Paciente</h1>
-            <div className="bg-white shadow-md rounded-lg p-6">
-                <h1 className="text-xl font-semibold mb-2">
-                    {patient.firstName} {patient.middleName} {patient.lastName}
-                </h1>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
-                    <div className="flex flex-col gap-2">
-                        <strong>Tipo de Sangre</strong>
-                        <BloodTypeChip bloodType={patient.bloodType} />
+        <div className="container mx-auto">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="flex items-start justify-between gap-4">
+                    <div>
+                        <p className="text-sm tracking-wide text-slate-500">Paciente</p>
+                        <h1 className="mt-1 text-2xl font-semibold text-slate-900">
+                            {patient.firstName} {patient.middleName} {patient.lastName}
+                        </h1>
+                    </div>
+                    <BloodTypeChip bloodType={patient.bloodType} />
+                </div>
+
+                <div className="mt-5 grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 text-sm md:grid-cols-2 lg:grid-cols-3">
+                    <div>
+                        <p className="text-slate-400">Documento</p>
+                        <p className="mt-1 text-slate-800">{patient.documentNumber}</p>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <strong>Documento</strong> 
-                        <p>{patient.documentNumber}</p>
+                    <div>
+                        <p className="text-slate-400">Fecha de Nacimiento</p>
+                        <p className="mt-1 text-slate-800">{patient.dateOfBirth.toLocaleDateString()}</p>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <strong>Fecha de Nacimiento</strong>
-                        <p>{patient.dateOfBirth.toLocaleDateString()}</p>
+                    <div>
+                        <p className="text-slate-400">Ocupacion</p>
+                        <p className="mt-1 text-slate-800">{patient.ocupation}</p>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <strong>Ocupación</strong>
-                        <p>{patient.ocupation}</p>
+                    <div>
+                        <p className="text-slate-400">Religion</p>
+                        <p className="mt-1 text-slate-800">{patient.religion}</p>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <strong>Religión</strong>
-                        <p>{patient.religion}</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                        <strong>Alergias</strong>
-                        <p>{patient.alergies}</p>
+                    <div className="md:col-span-2 lg:col-span-2">
+                        <p className="text-slate-400">Alergias</p>
+                        <p className="mt-1 text-slate-800">{patient.alergies}</p>
                     </div>
                 </div>
             </div>

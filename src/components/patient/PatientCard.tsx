@@ -1,60 +1,38 @@
-import { Patient } from '@/models/patient/Patient'
+import Link from 'next/link'
+import { Patient } from '@/models/patient/patients/Patient'
 import { BloodTypeChip } from './BloodTypeChip'
 
 export function PatientCard({ patient }: { patient: Patient }) {
     return (
-        <div className="max-w-md bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">
-                {patient.firstName} {patient.middleName} {patient.lastName}
-            </h2>
-
-            <div className="space-y-3 text-sm">
-                <div className="flex justify-between border-b pb-2">
-                    <span className="font-semibold text-gray-600">
-                        Tipo de Sangre:
-                    </span>
-                    <BloodTypeChip bloodType={patient.bloodType} />
+        <Link
+            href={`/patient/${patient.documentNumber}`}
+            className="w-full rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+        >
+            <div className="flex items-start justify-between gap-3">
+                <div>
+                    <h2 className="text-lg font-semibold text-slate-900">
+                        {patient.firstName} {patient.middleName} {patient.lastName}
+                    </h2>
+                    <p className="mt-1 text-sm text-slate-500">CI: {patient.documentNumber}</p>
                 </div>
-
-                <div className="flex justify-between border-b pb-2">
-                    <span className="font-semibold text-gray-600">
-                        Documento:
-                    </span>
-                    <span>{patient.documentNumber}</span>
-                </div>
-
-                <div className="flex justify-between border-b pb-2">
-                    <span className="font-semibold text-gray-600">
-                        Fecha de Nacimiento:
-                    </span>
-                    <span>
-                        {new Date(patient.dateOfBirth).toLocaleDateString(
-                            'es-ES'
-                        )}
-                    </span>
-                </div>
-
-                <div className="flex justify-between border-b pb-2">
-                    <span className="font-semibold text-gray-600">
-                        Ocupación:
-                    </span>
-                    <span>{patient.ocupation}</span>
-                </div>
-
-                <div className="flex justify-between border-b pb-2">
-                    <span className="font-semibold text-gray-600">
-                        Religión:
-                    </span>
-                    <span>{patient.religion}</span>
-                </div>
-
-                <div className="border-b pb-2">
-                    <span className="font-semibold text-gray-600 block mb-1">
-                        Alergias:
-                    </span>
-                    <span className="text-red-600">{patient.alergies}</span>
-                </div>
+                <BloodTypeChip bloodType={patient.bloodType} />
             </div>
-        </div>
+
+            <div className="mt-5 grid grid-cols-1 gap-3 border-t border-slate-100 pt-4 text-sm text-slate-600 sm:grid-cols-2">
+                <p>
+                    <span className="text-slate-400">Nacimiento:</span>{' '}
+                    {new Date(patient.dateOfBirth).toLocaleDateString('es-ES')}
+                </p>
+                <p>
+                    <span className="text-slate-400">Ocupacion:</span> {patient.ocupation}
+                </p>
+                <p>
+                    <span className="text-slate-400">Religion:</span> {patient.religion}
+                </p>
+                <p className="truncate">
+                    <span className="text-slate-400">Alergias:</span> {patient.alergies}
+                </p>
+            </div>
+        </Link>
     )
 }

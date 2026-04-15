@@ -1,15 +1,18 @@
-import { Patient } from '@/models/patient/Patient'
+import Link from 'next/link'
+import { Patient } from '@/models/patient/patients/Patient'
 import { BloodType } from '@/enums/patient/BloodType'
 
 import { PatientCard } from '@/components/patient/PatientCard'
 import { TitlePage } from '@/components/page/TitlePage'
+import { GridContainer } from '@/components/shared/ContainerGrid'
 
 export const MOCK_PATIENTS: Patient[] = [
     {
+        patientId: '1',
         firstName: 'Alejandro',
         middleName: 'José',
         lastName: 'García',
-        bloodType: BloodType.AB_NEGATIVE, // O "A+" según tu enum
+        bloodType: BloodType.AB_NEGATIVE,
         documentNumber: '1029384756',
         dateOfBirth: new Date(1985, 4, 12),
         ocupation: 'Ingeniero de Software',
@@ -17,10 +20,11 @@ export const MOCK_PATIENTS: Patient[] = [
         alergies: 'Penicilina, Polen',
     },
     {
+        patientId: '2',
         firstName: 'Mariana',
         middleName: 'Elena',
         lastName: 'Rodríguez',
-        bloodType: BloodType.O_POSITIVE, // O "O+" según tu enum
+        bloodType: BloodType.O_POSITIVE,
         documentNumber: '9876543210',
         dateOfBirth: new Date(1992, 10, 25),
         ocupation: 'Diseñadora Gráfica',
@@ -28,6 +32,7 @@ export const MOCK_PATIENTS: Patient[] = [
         alergies: 'Nueces, Mariscos',
     },
     {
+        patientId: '3',
         firstName: 'Roberto',
         middleName: 'Carlos',
         lastName: 'Méndez',
@@ -43,12 +48,17 @@ export const MOCK_PATIENTS: Patient[] = [
 export async function PatientListScreen() {
     return (
         <>
-            <TitlePage title="Lista de Pacientes" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className='flex flex-row justify-between'>
+                <TitlePage title="Lista de Pacientes" />
+                <Link href="/patient/create" className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors h-10'>
+                    Crear Paciente
+                </Link>
+            </div>
+            <GridContainer>
                 {MOCK_PATIENTS.map((patient, index) => (
                     <PatientCard key={index} patient={patient} />
                 ))}
-            </div>
+            </GridContainer>
         </>
     )
 }

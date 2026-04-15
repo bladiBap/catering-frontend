@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Providers } from '@/providers/Providers'
+import { SidebarMenu } from '@/components/layout/SidebarMenu'
 import './globals.css'
 
 const geistSans = Geist({
@@ -30,7 +31,10 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <Providers>
-                    {children}
+                    <div className="min-h-screen bg-gray-50 md:flex">
+                        <SidebarMenu />
+                        <main className="flex-1">{children}</main>
+                    </div>
                 </Providers>
             </body>
         </html>
