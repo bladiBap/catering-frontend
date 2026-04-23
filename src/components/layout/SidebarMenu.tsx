@@ -1,6 +1,15 @@
+"use client"
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function SidebarMenu() {
+    const pathname = usePathname()
+
+    if (pathname === '/login') {
+        return null
+    }
+
     return (
         <aside className="w-72 shrink-0 border-r border-gray-200 bg-white p-6">
             <div className="mb-8">
@@ -40,6 +49,14 @@ export function SidebarMenu() {
                     <ul className="space-y-2">
                         <li>
                             <Link
+                                href="/meal-plan"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Planes alimenticios
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 href="/meal-plan/ingredient"
                                 className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                             >
@@ -60,6 +77,46 @@ export function SidebarMenu() {
                                 className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                             >
                                 Recetas
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Calendario
+                    </h3>
+                    <ul className="space-y-2">
+                        <li>
+                            <Link
+                                href="/calendar"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Calendarios
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Cocina
+                    </h3>
+                    <ul className="space-y-2">
+                        <li>
+                            <Link
+                                href="/kitchen/order"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Ordenes
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/kitchen/package"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Paquetes
                             </Link>
                         </li>
                     </ul>

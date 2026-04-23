@@ -12,7 +12,7 @@ interface RecipeListScreenProps {
 export function RecipeListScreen({ recipes }: RecipeListScreenProps) {
     return (
         <>
-            <div className="flex flex-row justify-between">
+            <div className="mb-4 flex flex-row justify-between">
                 <TitlePage title="Lista de Recetas" />
                 <Link
                     href="/meal-plan/recipe/create"

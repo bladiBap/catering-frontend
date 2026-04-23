@@ -46,7 +46,7 @@ export async function PatientHistoryListScreen() {
     return (
         <>
             <TitlePage title="Historia Clinica" />
-            <div className="space-y-3">
+            <div className="mt-4 space-y-3">
                 {MOCK_PATIENTS_FOR_HISTORY.map((patient) => (
                     <PatientHistoryItem key={patient.patientId} patient={patient} />
                 ))}

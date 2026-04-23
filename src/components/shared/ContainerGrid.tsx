@@ -10,7 +10,7 @@ export function GridContainer({ children, emptyMessage = "No hay elementos para 
     const hasChildren = Children.count(children) > 0;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {hasChildren ? (
                 children
             ) : (

@@ -48,7 +48,7 @@ export const MOCK_PATIENTS: Patient[] = [
 export async function PatientListScreen() {
     return (
         <>
-            <div className='flex flex-row justify-between'>
+            <div className='mb-4 flex flex-row justify-between'>
                 <TitlePage title="Lista de Pacientes" />
                 <Link href="/patient/create" className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors h-10'>
                     Crear Paciente

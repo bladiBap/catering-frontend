@@ -12,7 +12,7 @@ interface NutritionistListScreenProps {
 export function NutritionistListScreen({ nutritionists }: NutritionistListScreenProps) {
     return (
         <>
-            <div className="flex flex-row justify-between">
+            <div className="mb-4 flex flex-row justify-between">
                 <TitlePage title="Lista de Nutricionistas" />
                 <Link
                     href="/meal-plan/nutritionist/create"

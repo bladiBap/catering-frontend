@@ -27,7 +27,7 @@ const MOCK_INGREDIENTS: Ingredient[] = [
 export async function IngredientListScreen() {
     return (
         <>
-            <div className="flex flex-row justify-between">
+            <div className="mb-4 flex flex-row justify-between">
                 <TitlePage title="Lista de Ingredientes" />
                 <Link
                     href="/meal-plan/ingredient/create"

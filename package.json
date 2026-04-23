@@ -13,9 +13,11 @@
     "dependencies": {
         "@heroui/react": "^2.8.10",
         "@internationalized/date": "^3.12.0",
+        "@next/third-parties": "^16.2.4",
+        "@react-google-maps/api": "^2.20.8",
         "axios": "^1.13.6",
         "framer-motion": "^12.35.1",
-        "next": "16.1.6",
+        "next": "^16.2.4",
         "react": "19.2.3",
         "react-dom": "19.2.3"
     },
