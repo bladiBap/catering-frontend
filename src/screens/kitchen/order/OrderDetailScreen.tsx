@@ -89,8 +89,8 @@ export function OrderDetailScreen({ order }: OrderDetailScreenProps) {
                 preparedQuantity,
             })
 
-            if (response.data?.orderItems?.length > 0) {
-                setOrderItems(response.data.orderItems)
+            if (response.value?.orderItems?.length > 0) {
+                setOrderItems(response.value.orderItems)
             } else {
                 setOrderItems((previousItems) =>
                     previousItems.map((item) => {

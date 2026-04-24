@@ -5,7 +5,7 @@ import { BloodTypeChip } from './BloodTypeChip'
 export function PatientHistoryItem({ patient }: { patient: Patient }) {
     return (
         <Link
-            href={`/patient/history/${patient.patientId}`}
+            href={`/patient/history/${patient.id}`}
             className="block w-full rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
         >
             <div className="flex items-start justify-between gap-3">

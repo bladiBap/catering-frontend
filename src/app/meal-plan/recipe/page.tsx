@@ -25,7 +25,7 @@ export default async function RecipeListPage() {
             pageSize: 20,
         })
 
-        recipes = response.data
+        recipes = response.value
     } catch {
         recipes = MOCK_RECIPES
     }

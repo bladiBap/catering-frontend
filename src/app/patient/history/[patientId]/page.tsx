@@ -41,7 +41,7 @@ const MOCK_BACKGROUNDS: Background[] = [
 export default async function HistoryByPatientPage({ params }: HistoryByPatientPageProps) {
     const { patientId } = await params
 
-    const patient = MOCK_PATIENTS_FOR_HISTORY.find((item) => item.patientId === patientId)
+    const patient = MOCK_PATIENTS_FOR_HISTORY.find((item) => item.id === patientId)
     const existingHistory = MOCK_HISTORIES.find((item) => item.patientId === patientId)
     const evolutions = existingHistory
         ? MOCK_EVOLUTIONS.filter((item) => item.historyId === existingHistory.historyId)

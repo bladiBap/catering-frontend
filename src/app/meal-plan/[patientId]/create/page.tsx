@@ -72,7 +72,7 @@ export default async function CreateMealPlanPage({ params }: CreateMealPlanPageP
             pageSize: 50,
         })
 
-        nutritionists = responseNutritionists.data
+        nutritionists = responseNutritionists.value
     } catch {
         nutritionists = MOCK_NUTRITIONISTS
     }
@@ -83,7 +83,7 @@ export default async function CreateMealPlanPage({ params }: CreateMealPlanPageP
             pageSize: 50,
         })
 
-        recipes = responseRecipes.data
+        recipes = responseRecipes.value
     } catch {
         recipes = MOCK_RECIPES
     }

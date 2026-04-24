@@ -8,7 +8,7 @@ import { GridContainer } from '@/components/shared/ContainerGrid'
 
 export const MOCK_PATIENTS: Patient[] = [
     {
-        patientId: '1',
+        id: '1',
         firstName: 'Alejandro',
         middleName: 'José',
         lastName: 'García',
@@ -20,7 +20,7 @@ export const MOCK_PATIENTS: Patient[] = [
         alergies: 'Penicilina, Polen',
     },
     {
-        patientId: '2',
+        id: '2',
         firstName: 'Mariana',
         middleName: 'Elena',
         lastName: 'Rodríguez',
@@ -32,7 +32,7 @@ export const MOCK_PATIENTS: Patient[] = [
         alergies: 'Nueces, Mariscos',
     },
     {
-        patientId: '3',
+        id: '3',
         firstName: 'Roberto',
         middleName: 'Carlos',
         lastName: 'Méndez',
@@ -45,7 +45,11 @@ export const MOCK_PATIENTS: Patient[] = [
     },
 ]
 
-export async function PatientListScreen() {
+interface PatientListScreenProps {
+    patients?: Patient[]
+}
+
+export async function PatientListScreen({ patients = MOCK_PATIENTS }: PatientListScreenProps) {
     return (
         <>
             <div className='mb-4 flex flex-row justify-between'>
@@ -55,7 +59,7 @@ export async function PatientListScreen() {
                 </Link>
             </div>
             <GridContainer>
-                {MOCK_PATIENTS.map((patient, index) => (
+                {patients.map((patient, index) => (
                     <PatientCard key={index} patient={patient} />
                 ))}
             </GridContainer>

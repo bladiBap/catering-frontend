@@ -2,28 +2,26 @@ import { ContainerPage } from '@/components/page/ContainerPage'
 import { Nutritionist } from '@/models/meal-plan/nutritionists/Nutritionist'
 import { NutritionistService } from '@/services/meal-plan/NutritionistService'
 import { NutritionistListScreen } from '@/screens/meal-plan/nutritionist/NutritionistListScreen'
-
-const MOCK_NUTRITIONISTS: Nutritionist[] = [
-    {
-        id: '6c54b71f-4a1b-47c1-aca4-0ceca607d5eb',
-        nombre: 'Andres Castro',
-        fechaCreacion: '2024-01-01T21:47:20Z',
-        activo: true,
-    },
-]
+import { cookies } from 'next/headers'
 
 export default async function NutritionistListPage() {
+    const token = (await cookies()).get('auth_token')?.value ?? ''
     let nutritionists: Nutritionist[] = []
 
     try {
-        const response = await NutritionistService.getAll('', {
+        const response = await NutritionistService.getAll(token, {
             page: 1,
             pageSize: 20,
         })
 
-        nutritionists = response.data
+        const value = response.value as unknown
+        if (Array.isArray(value)) {
+            nutritionists = value as Nutritionist[]
+        } else if (value && typeof value === 'object' && 'items' in (value as Record<string, unknown>)) {
+            nutritionists = ((value as { items?: Nutritionist[] }).items ?? [])
+        }
     } catch {
-        nutritionists = MOCK_NUTRITIONISTS
+        nutritionists = []
     }
 
     return (

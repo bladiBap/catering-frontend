@@ -1,47 +1,47 @@
 import { ContainerPage } from '@/components/page/ContainerPage'
-import { BloodType } from '@/enums/patient/BloodType'
 import { Contact } from '@/models/patient/patients/Contact'
 import { PatientDetailScreen } from '@/screens/patient/PatientDetailScreen'
+import { PatientService } from '@/services/patient/PatientService'
+import { cookies } from 'next/headers'
 
-export default async function PatientDetailPage() {
-    
-    const patient = {
-        patientId: '3',
-        firstName: 'Roberto',
-        middleName: 'Carlos',
-        lastName: 'Méndez',
-        bloodType: BloodType.B_NEGATIVE,
-        documentNumber: '4561237890',
-        dateOfBirth: new Date(1978, 1, 5),
-        ocupation: 'Arquitecto',
-        religion: 'Evangélico',
-        alergies: 'Ninguna',
+interface PatientDetailPageProps {
+    params: Promise<{ patientId: string }>
+}
+
+export default async function PatientDetailPage({ params }: PatientDetailPageProps) {
+    const { patientId } = await params
+    const token = (await cookies()).get('auth_token')?.value ?? ''
+
+    const patientResponse = await PatientService.getById(token, patientId)
+    if (!patientResponse.isSuccess || !patientResponse.value) {
+        return <ContainerPage>No se encontro el paciente solicitado.</ContainerPage>
     }
 
-    const contacts: Contact[] = [
-        {
-            contactId: '1',
-            patientId: '3',
-            coords: '-12.04318, -77.02824',
-            floor: '5',
-            reference: 'Edificio XYZ, cerca al parque ABC',
-            direction: 'Av. Principal 123, Ciudad, País',
-            phoneNumber: '+51 987654321',
-        },
-        {
-            contactId: '2',
-            patientId: '3',
-            coords: '-12.04637, -77.03024',
-            floor: '3',
-            reference: 'Casa de la tía María, cerca a la iglesia DEF',
-            direction: 'Calle Secundaria 456, Ciudad, País',
-            phoneNumber: '+51 912345678',
-        },
-    ]
+    const patient = patientResponse.value
+
+    let contacts: Contact[] = []
+    try {
+        const contactResponse = await PatientService.getContactsByPatientId(token, patientId)
+        const value = contactResponse.value as unknown
+
+        if (Array.isArray(value)) {
+            contacts = value as Contact[]
+        } else if (value && typeof value === 'object' && 'items' in (value as Record<string, unknown>)) {
+            contacts = ((value as { items?: Contact[] }).items ?? [])
+        }
+    } catch {
+        const embeddedContacts = (patient as unknown as { contacts?: Contact[] }).contacts
+        contacts = Array.isArray(embeddedContacts) ? embeddedContacts : []
+    }
+
+    const normalizedPatient = {
+        ...patient,
+        dateOfBirth: new Date(patient.dateOfBirth),
+    }
 
     return (
         <ContainerPage>
-            <PatientDetailScreen patient={patient} contacts={contacts ?? []} />
+            <PatientDetailScreen patient={normalizedPatient} contacts={contacts} />
         </ContainerPage>
     )
 }

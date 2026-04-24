@@ -43,7 +43,7 @@ export default async function CreateRecipePage() {
 
     try {
         const response = await CourseService.getAll('')
-        courses = response.data
+        courses = response.value
     } catch {
         courses = MOCK_COURSES
     }

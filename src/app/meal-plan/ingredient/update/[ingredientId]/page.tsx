@@ -19,8 +19,8 @@ export default async function UpdateIngredientPage({ params }: UpdateIngredientP
     try {
         const responseCategories = await CategoryService.getAll('')
         const responseUnitMeasurements = await UnitMeasurementService.getAll('')
-        categories = responseCategories.data
-        unitMeasurements = responseUnitMeasurements.data
+        categories = responseCategories.value
+        unitMeasurements = responseUnitMeasurements.value
     } catch {
         categories = []
         unitMeasurements = []

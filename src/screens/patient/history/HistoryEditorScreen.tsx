@@ -26,7 +26,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                     <h2 className="text-2xl font-bold text-gray-900">Historia Clinica</h2>
                     {!existingHistory && (
                         <Link
-                            href={`/patient/history/${patient.patientId}/create`}
+                            href={`/patient/history/${patient.id}/create`}
                             className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
                         >
                             Crear Historia Clinica
@@ -35,7 +35,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                 </div>
 
                 {existingHistory ? (
-                    <PatientHistoryCard patientId={patient.patientId} history={existingHistory} />
+                    <PatientHistoryCard patientId={patient.id} history={existingHistory} />
                 ) : (
                     <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4">
                         <p className="text-sm text-slate-600">No hay historia clinica registrada para este paciente.</p>
@@ -48,7 +48,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                     <h2 className="text-2xl font-bold text-gray-900">Evoluciones</h2>
                     {existingHistory ? (
                         <Link
-                            href={`/patient/evolution/${patient.patientId}`}
+                            href={`/patient/evolution/${patient.id}`}
                             className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
                         >
                             Crear Evolucion
@@ -65,7 +65,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                         {evolutions.map((evolution) => (
                             <PatientEvolutionCard
                                 key={evolution.evolutionId}
-                                patientId={patient.patientId}
+                                patientId={patient.id}
                                 evolution={evolution}
                             />
                         ))}
@@ -82,7 +82,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                     <h2 className="text-2xl font-bold text-gray-900">Antecedentes</h2>
                     {existingHistory ? (
                         <Link
-                            href={`/patient/background/${patient.patientId}`}
+                            href={`/patient/background/${patient.id}`}
                             className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
                         >
                             Crear Antecedente
@@ -99,7 +99,7 @@ export function HistoryEditorScreen({ patient, existingHistory, evolutions = [],
                         {backgrounds.map((background) => (
                             <PatientBackgroundCard
                                 key={background.backgroudId}
-                                patientId={patient.patientId}
+                                patientId={patient.id}
                                 background={background}
                             />
                         ))}

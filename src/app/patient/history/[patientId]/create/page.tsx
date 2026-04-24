@@ -8,7 +8,7 @@ interface HistoryCreatePageProps {
 
 export default async function HistoryCreatePage({ params }: HistoryCreatePageProps) {
     const { patientId } = await params
-    const patient = MOCK_PATIENTS_FOR_HISTORY.find((item) => item.patientId === patientId)
+    const patient = MOCK_PATIENTS_FOR_HISTORY.find((item) => item.id === patientId)
 
     return (
         <ContainerPage>

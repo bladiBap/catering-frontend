@@ -12,7 +12,7 @@ export default async function KitchenOrderPage() {
             pageSize: 100,
         })
 
-        orders = response.data
+        orders = response.value
     } catch {
         orders = MOCK_ORDERS
     }

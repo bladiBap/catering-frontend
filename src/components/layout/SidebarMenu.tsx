@@ -121,6 +121,38 @@ export function SidebarMenu() {
                         </li>
                     </ul>
                 </div>
+
+                <div>
+                    <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                        Delivery
+                    </h3>
+                    <ul className="space-y-2">
+                        <li>
+                            <Link
+                                href="/delivery/driver"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Drivers
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/delivery/zone"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Zonas de delivery
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/delivery/route"
+                                className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                            >
+                                Rutas
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </aside>
     )

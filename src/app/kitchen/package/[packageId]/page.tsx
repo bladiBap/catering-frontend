@@ -68,7 +68,7 @@ export default async function PackageByIdPage({ params }: PackageByIdPageProps) 
 
     try {
         const response = await PackageService.getById('', packageId)
-        packageItem = response.data
+        packageItem = response.value
     } catch {
         packageItem = MOCK_PACKAGE_DETAILS.find((item) => item.id === packageId)
     }

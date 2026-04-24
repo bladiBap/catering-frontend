@@ -18,7 +18,7 @@ export function MealPlanListScreen({ patient, mealPlans }: MealPlanListScreenPro
                 <TitlePage title="Listado de planes alimenticios" />
 
                 <Link
-                    href={`/meal-plan/${patient.patientId}/create`}
+                    href={`/meal-plan/${patient.id}/create`}
                     className="h-10 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
                 >
                     Crear Plan

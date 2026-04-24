@@ -1,5 +1,6 @@
 'use client'
 import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import type { Selection } from "@heroui/react";
 import type { DateValue } from "@internationalized/date";
@@ -13,7 +14,8 @@ import { Select, SelectItem } from "@heroui/react";
 
 import { BloodType } from '@/enums/patient/BloodType'
 import { TitlePage } from '@/components/page/TitlePage'
-import { Patient } from '@/models/patient/patients/Patient';
+import { CreatePatientRequest, Patient } from '@/models/patient/patients/Patient';
+import { PatientService } from '@/services/patient/PatientService';
 
 const bloodTypes = [
     { key: BloodType.A_POSITIVE.toString() , label: 'A +' },
@@ -31,6 +33,7 @@ interface PatientCreateScreenProps {
 }
 
 export function PatientFormScreen({ patient }: PatientCreateScreenProps) {
+    const router = useRouter()
 
     const [firstName, setFirstName] = useState(patient?.firstName || '')
     const [middleName, setMiddleName] = useState(patient?.middleName || '')
@@ -41,23 +44,104 @@ export function PatientFormScreen({ patient }: PatientCreateScreenProps) {
     const [ocupation, setOcupation] = useState(patient?.ocupation || '')
     const [religion, setReligion] = useState(patient?.religion || '')
     const [alergies, setAlergies] = useState(patient?.alergies || '')
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const updatePatient = () => {
+    const getSelectedBloodType = (): BloodType => {
+        const selected = Array.from(bloodType)[0]
+        if (!selected) {
+            return BloodType.O_POSITIVE
+        }
 
+        return Number(selected) as BloodType
     }
 
-    const createPatient = () => {
+    const updatePatient = async () => {
+        setErrorMessage('')
+        setIsSubmitting(true)
 
+        try {
+            if (!patient?.id) {
+                setErrorMessage('No se encontro el paciente a editar.')
+                return
+            }
+
+            if (!dateOfBirth) {
+                setErrorMessage('La fecha de nacimiento es obligatoria.')
+                return
+            }
+
+            const payload: Patient = {
+                id: patient.id,
+                firstName,
+                middleName,
+                lastName,
+                bloodType: getSelectedBloodType(),
+                documentNumber,
+                dateOfBirth: dateOfBirth.toDate(getLocalTimeZone()),
+                ocupation,
+                religion,
+                alergies,
+            }
+
+            const response = await PatientService.update('', payload)
+            if (!response.isSuccess) {
+                setErrorMessage(response.message || 'No se pudo actualizar el paciente.')
+                return
+            }
+
+            router.push(`/patient/${patient.id}`)
+        } catch {
+            setErrorMessage('Ocurrio un error al actualizar el paciente.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const createPatient = async () => {
+        setErrorMessage('')
+        setIsSubmitting(true)
+
+        try {
+            if (!dateOfBirth) {
+                setErrorMessage('La fecha de nacimiento es obligatoria.')
+                return
+            }
+
+            const payload: CreatePatientRequest = {
+                firstName,
+                middleName,
+                lastName,
+                bloodType: getSelectedBloodType(),
+                documentNumber,
+                dateOfBirth: dateOfBirth.toDate(getLocalTimeZone()).toISOString().split('T')[0],
+                ocupation,
+                religion,
+                alergies,
+            }
+
+            const response = await PatientService.create('', payload)
+            if (!response.isSuccess) {
+                setErrorMessage(response.message || 'No se pudo crear el paciente.')
+                return
+            }
+
+            router.push('/patient')
+        } catch {
+            setErrorMessage('Ocurrio un error al crear el paciente.')
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         e.stopPropagation()
 
         if (patient) {
-            updatePatient()
+            await updatePatient()
         } else {
-            createPatient()
+            await createPatient()
         }
     }
 
@@ -68,6 +152,9 @@ export function PatientFormScreen({ patient }: PatientCreateScreenProps) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl"
                 onSubmit={handleSubmit}
             >
+                {errorMessage && (
+                    <p className="md:col-span-2 text-sm text-red-600">{errorMessage}</p>
+                )}
                 <Input
                     isRequired
                     label="Nombre"
@@ -152,6 +239,8 @@ export function PatientFormScreen({ patient }: PatientCreateScreenProps) {
                     variant="flat" 
                     color='primary'
                     className='w-48'
+                    isLoading={isSubmitting}
+                    isDisabled={isSubmitting}
                 >
                     {patient ? "Actualizar" : "Crear"}
                 </Button>

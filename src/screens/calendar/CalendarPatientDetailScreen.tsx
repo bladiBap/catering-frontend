@@ -29,7 +29,7 @@ export function CalendarPatientDetailScreen({ patient, calendars }: CalendarPati
 
             <GridContainer emptyMessage="No hay calendarios para mostrar">
                 {calendars.map((calendar) => (
-                    <CalendarCard key={calendar.Id} patientId={patient.patientId} calendar={calendar} />
+                    <CalendarCard key={calendar.Id} patientId={patient.id} calendar={calendar} />
                 ))}
             </GridContainer>
         </div>

@@ -94,7 +94,7 @@ export function CalendarDetailScreen({ patient, calendar }: CalendarDetailScreen
                 </div>
 
                 <Link
-                    href={`/calendar/${patient.patientId}`}
+                    href={`/calendar/${patient.id}`}
                     className="h-10 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700"
                 >
                     Volver a calendarios
@@ -166,7 +166,7 @@ export function CalendarDetailScreen({ patient, calendar }: CalendarDetailScreen
                         longitud: newDirection.Longitud,
                     })
 
-                    setCalendarState(response.data)
+                    setCalendarState(response.value)
                     setIsCreateDirectionOpen(false)
                 }}
                 onToggleDelivery={async () => {

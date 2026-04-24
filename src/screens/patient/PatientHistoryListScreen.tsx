@@ -5,7 +5,7 @@ import { PatientHistoryItem } from '@/components/patient/PatientHistoryItem'
 
 export const MOCK_PATIENTS_FOR_HISTORY: Patient[] = [
     {
-        patientId: '1',
+        id: '1',
         firstName: 'Alejandro',
         middleName: 'Jose',
         lastName: 'Garcia',
@@ -17,7 +17,7 @@ export const MOCK_PATIENTS_FOR_HISTORY: Patient[] = [
         alergies: 'Penicilina, Polen',
     },
     {
-        patientId: '2',
+        id: '2',
         firstName: 'Mariana',
         middleName: 'Elena',
         lastName: 'Rodriguez',
@@ -29,7 +29,7 @@ export const MOCK_PATIENTS_FOR_HISTORY: Patient[] = [
         alergies: 'Nueces, Mariscos',
     },
     {
-        patientId: '3',
+        id: '3',
         firstName: 'Roberto',
         middleName: 'Carlos',
         lastName: 'Mendez',
@@ -42,13 +42,17 @@ export const MOCK_PATIENTS_FOR_HISTORY: Patient[] = [
     },
 ]
 
-export async function PatientHistoryListScreen() {
+interface PatientHistoryListScreenProps {
+    patients?: Patient[]
+}
+
+export async function PatientHistoryListScreen({ patients = MOCK_PATIENTS_FOR_HISTORY }: PatientHistoryListScreenProps) {
     return (
         <>
             <TitlePage title="Historia Clinica" />
             <div className="mt-4 space-y-3">
-                {MOCK_PATIENTS_FOR_HISTORY.map((patient) => (
-                    <PatientHistoryItem key={patient.patientId} patient={patient} />
+                {patients.map((patient) => (
+                    <PatientHistoryItem key={patient.id} patient={patient} />
                 ))}
             </div>
         </>

@@ -11,7 +11,7 @@ interface CalendarByPatientPageProps {
 
 export default async function CalendarByPatientPage({ params }: CalendarByPatientPageProps) {
     const { patientId } = await params
-    const patient = MOCK_PATIENTS.find((item) => item.patientId === patientId)
+    const patient = MOCK_PATIENTS.find((item) => item.id === patientId)
 
     if (!patient) {
         return <ContainerPage>No se encontro el paciente solicitado.</ContainerPage>
@@ -21,7 +21,7 @@ export default async function CalendarByPatientPage({ params }: CalendarByPatien
 
     try {
         const response = await CalendarService.getByPatient('', patientId)
-        calendars = response.data
+        calendars = response.value
     } catch {
         calendars = getMockCalendariosByPatient(patientId)
     }

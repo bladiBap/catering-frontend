@@ -10,7 +10,7 @@ interface CalendarPatientCardProps {
 export function CalendarPatientCard({ patient }: CalendarPatientCardProps) {
     return (
         <Link
-            href={`/calendar/${patient.patientId}`}
+            href={`/calendar/${patient.id}`}
             className="w-full rounded-xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
         >
             <div className="flex items-start justify-between gap-3">

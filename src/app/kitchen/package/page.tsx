@@ -12,7 +12,7 @@ export default async function KitchenPackagePage() {
             pageSize: 100,
         })
 
-        packages = response.data
+        packages = response.value
     } catch {
         packages = MOCK_PACKAGES
     }

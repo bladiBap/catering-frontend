@@ -1,7 +1,7 @@
 import { BloodType } from '@/enums/patient/BloodType';
 
 export interface Patient {
-    patientId: string;
+    id: string;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -19,7 +19,7 @@ export interface CreatePatientRequest {
     lastName: string;
     bloodType: BloodType;
     documentNumber: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     ocupation: string;
     religion: string;
     alergies: string;

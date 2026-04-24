@@ -89,8 +89,8 @@ export function PackageDetailScreen({ packageItem }: PackageDetailScreenProps) {
                 preparedQuantity,
             })
 
-            if (response.data?.packageItems?.length > 0) {
-                setPackageItems(response.data.packageItems)
+            if (response.value?.packageItems?.length > 0) {
+                setPackageItems(response.value.packageItems)
             } else {
                 setPackageItems((previousItems) =>
                     previousItems.map((item) => {

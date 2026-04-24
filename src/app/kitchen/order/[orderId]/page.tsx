@@ -86,7 +86,7 @@ export default async function OrderByIdPage({ params }: OrderByIdPageProps) {
 
     try {
         const response = await OrderService.getById('', orderId)
-        order = response.data
+        order = response.value
     } catch {
         order = MOCK_ORDER_DETAILS.find((item) => item.id === orderId)
     }
